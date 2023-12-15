@@ -44,22 +44,26 @@ class LUX2EV(toga.App):
         button_calcuate = toga.Button('Calculate', on_press=self.calculate)
 
         # Create layout box
-        horizontal_layout_box = toga.Box(style=Pack(direction=ROW))
+        horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))
+        horizontal_layout_box2 = toga.Box(style=Pack(direction=ROW))
+
         
-        horizontal_layout_box.add(label_lux)
-        horizontal_layout_box.add(self.input_lux)
-        horizontal_layout_box.add(label_iso)
-        horizontal_layout_box.add(self.select_iso)
-        horizontal_layout_box.add(label_ev)
-        horizontal_layout_box.add(self.label_ev_value)
-        horizontal_layout_box.add(self.select_ev_adjust)
-        horizontal_layout_box.add(self.label_ev_adjust)
-        horizontal_layout_box.add(button_calcuate)
-        horizontal_layout_width = horizontal_layout_box.style.width
+        horizontal_layout_box1.add(label_lux)
+        horizontal_layout_box1.add(self.input_lux)
+        horizontal_layout_box1.add(label_iso)
+        horizontal_layout_box1.add(self.select_iso)
+        horizontal_layout_box2.add(label_ev)
+        horizontal_layout_box2.add(self.label_ev_value)
+        horizontal_layout_box2.add(self.select_ev_adjust)
+        horizontal_layout_box2.add(self.label_ev_adjust)
+        horizontal_layout_box2.add(button_calcuate)
 
         # Center align the elements in horizontal_layout_box
-        for widget in horizontal_layout_box.children:
-            widget.style.update(alignment='center',text_align='center')
+        
+        horizontal_layout_box_list = [horizontal_layout_box1,horizontal_layout_box2]
+        for box in horizontal_layout_box_list:
+            for widget in box.children:
+                widget.style.update(alignment='center',text_align='center')
 
         # Create a table to display aperture, shutter speed, and suitable scene
         # self.table = toga.Table(['Aperture', 'Shutter Speed', 'Suitable Scene'], style=Pack(flex=1))
@@ -68,10 +72,9 @@ class LUX2EV(toga.App):
         vertical_layout_box = toga.Box(style=Pack(direction=COLUMN))
         vertical_layout_box.add(self.table)
 
-        self.main_box.style.width = horizontal_layout_width
-        self.main_box.add(horizontal_layout_box)
+        for box in horizontal_layout_box_list:
+            self.main_box.add(box)
         vertical_layout_box.style.update(flex=1)
-        vertical_layout_box.style.width = horizontal_layout_width
         self.main_box.add(vertical_layout_box)
 
         self.main_window = toga.MainWindow(title=self.formal_name, size=(280, 480),)
