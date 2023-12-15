@@ -121,17 +121,8 @@ class LUX2EV(toga.App):
         else:
             return ('Overexposure Warning')
 
-    def nearest_power_of_two(self,num):
-        '''
-        返回最近的2的幂
-        '''
-        power = math.ceil(math.log(num, 2))
-        return int(math.pow(2, power))
-
-
 def main():
     return LUX2EV()
-
 
 if __name__ == '__main__':
     main().main_loop()
