@@ -33,7 +33,7 @@ class LUX2EV(toga.App):
         label_lux = toga.Label('Lux: ')
         label_iso = toga.Label('ISO: ')
         self.input_lux = toga.TextInput(placeholder='Input Lux', on_change=self.set_lux_value, style=Pack(width=80))
-        self.select_iso = toga.Selection(items=self.iso_list, on_change=self.set_iso_value, style=Pack(width=60))
+        self.select_iso = toga.Selection(items=self.iso_list, on_change=self.set_iso_value, style=Pack(width=80))
         button_calcuate = toga.Button('Calculate', on_press=self.calculate)
 
         # Create layout box
