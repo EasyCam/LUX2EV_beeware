@@ -48,11 +48,11 @@ class LUX2EV(toga.App):
 
         # Center align the elements in horizontal_layout_box
         for widget in horizontal_layout_box.children:
-            widget.style.update(text_align='center')
+            widget.style.update(alignment='center',text_align='center')
 
         # Create a table to display aperture, shutter speed, and suitable scene
         # self.table = toga.Table(['Aperture', 'Shutter Speed', 'Suitable Scene'], style=Pack(flex=1))
-        self.table = toga.Table(['Aperture', 'Shutter Speed'], style=Pack(flex=1))
+        self.table = toga.Table(['Aperture', 'Shutter Speed'], style=Pack(flex=1,alignment='center',text_align='center'))
 
         vertical_layout_box = toga.Box(style=Pack(direction=COLUMN))
         vertical_layout_box.add(self.table)
@@ -67,7 +67,6 @@ class LUX2EV(toga.App):
         self.main_window.content = self.main_box
 
         # Call on_resize to display the resized width and height
-
         self.main_window.show()
         self.main_window.on_resize = self.on_resize  # Attach the resize event handler
         self.on_resize(self.main_window)
