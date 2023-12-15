@@ -26,10 +26,12 @@ class LUX2EV(toga.App):
         self.iso_value = 50
         self.aperture_value = 0
 
-        main_box = toga.Box(style=Pack(direction=COLUMN))
+
+
+        self.main_box = toga.Box(style=Pack(direction=COLUMN))
         
-        label_lux = toga.Label('Input Lux: ')
-        label_iso = toga.Label('Select ISO: ')
+        label_lux = toga.Label('Lux: ')
+        label_iso = toga.Label('ISO: ')
         self.input_lux = toga.TextInput(placeholder='Input Lux', on_change=self.set_lux_value, style=Pack(width=80))
         self.select_iso = toga.Selection(items=self.iso_list, on_change=self.set_iso_value, style=Pack(width=60))
         button_calcuate = toga.Button('Calculate', on_press=self.calculate)
@@ -55,22 +57,23 @@ class LUX2EV(toga.App):
         vertical_layout_box = toga.Box(style=Pack(direction=COLUMN))
         vertical_layout_box.add(self.table)
 
-        main_box.style.width = horizontal_layout_width
-        main_box.add(horizontal_layout_box)
+        self.main_box.style.width = horizontal_layout_width
+        self.main_box.add(horizontal_layout_box)
         vertical_layout_box.style.update(flex=1)
         vertical_layout_box.style.width = horizontal_layout_width
-        main_box.add(vertical_layout_box)
+        self.main_box.add(vertical_layout_box)
 
-        self.main_window = toga.MainWindow(title=self.formal_name)
-        self.main_window.on_resize = self.on_resize  # Attach the resize event handler
-        self.main_window.content = main_box
+        self.main_window = toga.MainWindow(title=self.formal_name, size=(280, 480),)
+        self.main_window.content = self.main_box
+
+        # Call on_resize to display the resized width and height
+
         self.main_window.show()
-
-        
+        self.main_window.on_resize = self.on_resize  # Attach the resize event handler
+        self.on_resize(self.main_window)
     def on_resize(self, widget):
-        width = widget.style.width
-        height = widget.style.height
-        print(f"Window resized: width={width}, height={height}")
+        width, height = widget.size
+        print(f"width is {width}px, height is {height}px")
 
     def set_lux_value(self, widget):
         self.lux_value = 0
