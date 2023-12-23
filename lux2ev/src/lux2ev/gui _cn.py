@@ -1,4 +1,5 @@
-import toga, math
+import toga, math, csv
+import pandas as pd
 import numpy as np
 from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
@@ -95,7 +96,9 @@ class MainScreen(toga.App):
         # 创建 Button 组件，点击时调用 calculate 方法
         self.button_calcuate = toga.Button('计算', on_press=self.calculate)
         # 创建 Table 组件，包含两列 ["Aperture", "Shutter Speed"]，样式为 flex=1, alignment='center', text_align='center'
-        self.a_table_view = toga.Table(['光圈', '快门'], style=Pack(flex=1,alignment='center',text_align='center'))
+        self.a_table_view = toga.Table(['光圈', '快门'], 
+        style=Pack(flex=1,alignment='center',text_align='center'))
+        self.a_button_save = toga.Button('保存', on_press=self.save_table_a)
         # 创建布局框，方向为纵向
         horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))  
         # 将 Label 组件添加到布局框中
@@ -106,7 +109,7 @@ class MainScreen(toga.App):
         for box in horizontal_layout_box1.children:
             box.style.update(alignment='center', text_align='center')
         # 将组件列表添加到 a_content_list 中
-        self.a_content_list = [horizontal_layout_box1, self.a_table_view]
+        self.a_content_list = [horizontal_layout_box1, self.a_table_view,self.a_button_save]
     
     def build_b(self):
         # 创建 Label 显示 "'选择光圈'"
@@ -120,6 +123,7 @@ class MainScreen(toga.App):
         
         # 创建 Table 组件，包含两列 ["ISO", "Shutter Speed"]，样式为 flex=1, alignment='center', text_align='center'
         self.b_table_view = toga.Table(['感光度 ISO', '快门'], style=Pack(flex=1,alignment='center',text_align='center'))
+        self.b_button_save = toga.Button('保存', on_press=self.save_table_b)
         # 创建布局框，方向为纵向
         horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))
         # 将 Label 组件添加到布局框中
@@ -130,7 +134,7 @@ class MainScreen(toga.App):
         for box in horizontal_layout_box1.children:
             box.style.update(alignment='center', text_align='center')
         # 将组件列表添加到 b_content_list 中
-        self.b_content_list = [horizontal_layout_box1, self.b_table_view]
+        self.b_content_list = [horizontal_layout_box1, self.b_table_view,self.b_button_save]
     
     def build_c(self):
         # 创建 Label 显示 "'选择快门'"
@@ -144,6 +148,7 @@ class MainScreen(toga.App):
         
         # 创建 Table 组件，包含两列 ["ISO", "Aperture"]，样式为 flex=1, alignment='center', text_align='center'
         self.c_table_view = toga.Table(['感光度 ISO', '光圈'], style=Pack(flex=1,alignment='center',text_align='center'))
+        self.c_button_save = toga.Button('保存', on_press=self.save_table_c)
         # 创建布局框，方向为纵向
         horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))
         # 将 Label 组件添加到布局框中
@@ -154,7 +159,7 @@ class MainScreen(toga.App):
         for box in horizontal_layout_box1.children:
             box.style.update(alignment='center', text_align='center')
         # 将组件列表添加到 c_content_list 中
-        self.c_content_list = [horizontal_layout_box1, self.c_table_view]
+        self.c_content_list = [horizontal_layout_box1, self.c_table_view,self.c_button_save]
     
     def build_d(self):
         # 创建 Label 显示 "Long Exposure."
@@ -167,6 +172,7 @@ class MainScreen(toga.App):
         self.d_button_calcuate = toga.Button('计算', on_press=self.calculate_d)        
         # 创建 Table 组件，包含两列 ["ISO", "Aperture"]，样式为 flex=1, alignment='center', text_align='center'
         self.d_table_view = toga.Table(['感光度 ISO', '光圈'], style=Pack(flex=1,alignment='center',text_align='center'))
+        self.d_button_save = toga.Button('保存', on_press=self.save_table_d)
         # 创建布局框，方向为纵向
         horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))
         # 将 Label 组件添加到布局框中
@@ -177,7 +183,7 @@ class MainScreen(toga.App):
         for box in horizontal_layout_box1.children:
             box.style.update(alignment='center', text_align='center')
         # 将组件列表添加到 d_content_list 中
-        self.d_content_list = [horizontal_layout_box1, self.d_table_view]
+        self.d_content_list = [horizontal_layout_box1, self.d_table_view,self.d_button_save]
     
     def build_e(self):
         # 创建 Label 显示介绍性文字
@@ -277,6 +283,40 @@ class MainScreen(toga.App):
         # 将 e_content_list 中的组件添加到垂直布局框中
         for item in self.e_content_list:
             self.vertical_layout_box.add(item)
+    
+
+
+    def save_table_a(self, widget):
+        """
+        保存表格a到文件a.csv
+        :param widget: widgets，用于触发该函数
+        """
+        file_path = 'a.csv'
+        self.a_df.to_csv(file_path, encoding='gbk',index=False)
+
+    def save_table_b(self, widget):
+        """
+        保存表格b到文件b.csv
+        :param widget: widgets，用于触发该函数
+        """
+        file_path = 'b.csv'
+        self.b_df.to_csv(file_path, encoding='gbk',index=False)
+
+    def save_table_c(self, widget):
+        """
+        保存表格c到文件c.csv
+        :param widget: widgets，用于触发该函数
+        """
+        file_path = 'c.csv'
+        self.c_df.to_csv(file_path, encoding='gbk',index=False)
+
+    def save_table_d(self, widget):
+        """
+        保存表格d到文件d.csv
+        :param widget: widgets，用于触发该函数
+        """
+        file_path = 'd.csv'
+        self.d_df.to_csv(file_path, encoding='gbk',index=False)
 
     def clear_content(self):
         """
@@ -369,12 +409,16 @@ class MainScreen(toga.App):
         ev_used = round(ev_used * 10) / 10
         ev_used = ev_used*(self.nd_adjust_value)
                    
+        
         data = []
         for i in range(aperture_count):
             aperture = self.aperture_list[i]
             shutter_speed = self.calculate_shutter_speed(aperture, ev_used, iso)
-            data.append([str(aperture), shutter_speed])
-            self.a_table_view.data.append([str(aperture), shutter_speed])
+            data.append([str(aperture), '\''+str(shutter_speed)+'\''])
+            self.a_table_view.data.append([str(aperture), str(shutter_speed)])
+        self.a_df =pd.DataFrame(data)
+        self.a_df.columns = ['光圈F值', '快门速度']        
+        print(self.a_df)
 
     def calculate_b(self, widget):
         '''
@@ -399,8 +443,11 @@ class MainScreen(toga.App):
         for i in range(iso_count):
             iso = self.iso_list[i]
             shutter_speed = self.calculate_shutter_speed(aperture, ev_used, iso)
-            data.append([str(iso), shutter_speed])
-            self.b_table_view.data.append([str(iso), shutter_speed])
+            data.append([str(iso), '\''+str(shutter_speed)+'\''])
+            self.b_table_view.data.append([str(iso), str(shutter_speed)])
+        self.b_df =pd.DataFrame(data)
+        self.b_df.columns = ['感光度ISO', '快门速度']     
+        print(self.b_df)
 
     def calculate_c(self, widget):
         '''
@@ -429,6 +476,9 @@ class MainScreen(toga.App):
             #     pass
             data.append([str(iso), aperture])
             self.c_table_view.data.append([str(iso), aperture])
+        self.c_df =pd.DataFrame(data)
+        self.c_df.columns = ['感光度ISO', '光圈F值']     
+        print(self.c_df)
 
     def calculate_d(self, widget):
         '''
@@ -457,6 +507,9 @@ class MainScreen(toga.App):
             #     pass
             data.append([str(iso), aperture])
             self.d_table_view.data.append([str(iso), aperture])
+        self.d_df =pd.DataFrame(data)
+        self.d_df.columns = ['感光度ISO', '光圈F值']     
+        print(self.d_df)
 
     # 根据ISO计算光圈和对应快门速度
     def calculate_shutter_speed(self,aperture,ev,iso):
