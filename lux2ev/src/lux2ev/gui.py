@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
+import platform
 
 
 class MainScreen(toga.App):
@@ -282,12 +283,19 @@ class MainScreen(toga.App):
         for item in self.e_content_list:
             self.vertical_layout_box.add(item)
 
+
+
     def save_table_a(self, widget):
         """
         保存表格a到文件a.csv
         :param widget: widgets，用于触发该函数
         """
-        file_path = 'a.csv'
+        print(platform.system())
+        if platform.system() == 'Linux':
+            file_path = '/storage/emulated/0/Download/a.csv'
+        else:
+            file_path = 'a.csv'
+            
         self.a_df.to_csv(file_path, encoding='gbk',index=False)
 
     def save_table_b(self, widget):
@@ -295,7 +303,11 @@ class MainScreen(toga.App):
         保存表格b到文件b.csv
         :param widget: widgets，用于触发该函数
         """
-        file_path = 'b.csv'
+        print(platform.system())
+        if platform.system() == 'Linux':
+            file_path = '/storage/emulated/0/Download/b.csv'
+        else:
+            file_path = 'b.csv'
         self.b_df.to_csv(file_path, encoding='gbk',index=False)
 
     def save_table_c(self, widget):
@@ -303,7 +315,11 @@ class MainScreen(toga.App):
         保存表格c到文件c.csv
         :param widget: widgets，用于触发该函数
         """
-        file_path = 'c.csv'
+        print(platform.system())
+        if platform.system() == 'Linux':
+            file_path = '/storage/emulated/0/Download/c.csv'
+        else:
+            file_path = 'c.csv'
         self.c_df.to_csv(file_path, encoding='gbk',index=False)
 
     def save_table_d(self, widget):
@@ -311,7 +327,11 @@ class MainScreen(toga.App):
         保存表格d到文件d.csv
         :param widget: widgets，用于触发该函数
         """
-        file_path = 'd.csv'
+        print(platform.system())
+        if platform.system() == 'Linux':
+            file_path = '/storage/emulated/0/Download/d.csv'
+        else:
+            file_path = 'd.csv'
         self.d_df.to_csv(file_path, encoding='gbk',index=False)
 
 
