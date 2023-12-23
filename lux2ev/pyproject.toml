@@ -2,7 +2,7 @@
 [tool.briefcase]
 project_name = "LUX2EV"
 bundle = "easy.cam"
-version = "0.0.1"
+version = "2023.12.23.1"
 url = "https://github.com/EasyCam/LUX2EV_beeware"
 license = "GNU General Public License v3 or later (GPLv3+)"
 author = "EasyCam"
@@ -22,6 +22,9 @@ test_sources = [
 ]
 
 requires = [
+    "matplotlib",
+    "numpy",
+    "pandas",
 ]
 test_requires = [
     "pytest",
