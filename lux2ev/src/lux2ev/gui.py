@@ -28,10 +28,10 @@ class MainScreen(toga.App):
         self.horizontal_layout_box =  toga.Box(style=Pack(direction=ROW))
         self.horizontal_layout_box1 =  toga.Box(style=Pack(direction=ROW))
 
-        button_a = toga.Button('Set ISO', style=Pack(flex=1), on_press=self.show_a)
-        button_b = toga.Button('Set Aperture', style=Pack(flex=1), on_press=self.show_b)
-        button_c = toga.Button('Set Shutter', style=Pack(flex=1), on_press=self.show_c)
-        button_d = toga.Button('Long Exposure', style=Pack(flex=1), on_press=self.show_d)
+        button_a = toga.Button('ISO', style=Pack(flex=1), on_press=self.show_a)
+        button_b = toga.Button('F', style=Pack(flex=1), on_press=self.show_b)
+        button_c = toga.Button('S', style=Pack(flex=1), on_press=self.show_c)
+        button_d = toga.Button('Long', style=Pack(flex=1), on_press=self.show_d)
         button_e = toga.Button('Home', style=Pack(flex=1), on_press=self.show_e)
 
         self.label_lux = toga.Label('Lux: ')
@@ -160,8 +160,8 @@ class MainScreen(toga.App):
 
 
     def build_e(self):
-        self.e_label = toga.Label('\nInput Lux value and then:\n\n')
-        self.e_description = toga.Label('''Set ISO: Select ISO to get Aperture and Shutter.\n\nSet Aperture: Select Aperture to get ISO and Shutter.\n\nSet Shutter: Select Shutter speed to get ISO and Aperture.\n\nInput Shutter: Input Shutter speed to get ISO and Aperture. ''')
+        self.e_label = toga.Label('\nInput Lux value and then choose a Mode:\n\n')
+        self.e_description = toga.Label('''ISO: Select ISO to get Aperture and Shutter.\n\nF: Select Aperture (F value) to get ISO and Shutter.\n\nS: Select Shutter speed to get ISO and Aperture.\n\nLong: Input Shutter speed to get ISO and Aperture. ''')
         self.e_content_list = [self.e_label, self.e_description]
 
     def show_a(self, widget):
