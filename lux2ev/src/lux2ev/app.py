@@ -7,6 +7,7 @@ from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
 
 
+
 class LUX2EV(toga.App):
 
     def startup(self):
@@ -17,11 +18,11 @@ class LUX2EV(toga.App):
         We then create a main window (with a name matching the app), and
         show the main window.
         """
-        self.iso_list = [50,64,100,125,160,200,250,320,400,500,640,800,1000,1250,1600,2000,2500,3200,4000,5000,6400,8000,10000,12500,16000,20000,25000,32000,4000,5000,6400,8000,10000,12800,16000,20000,25600,51200,102400]
+        self.iso_list = [50,64,100,125,160,200,250,320,400,500,640,800,1000,1250,1600,2000,2500,3200,4000,5000,6400,8000,10000,12500,16000,20000,25000,32000,40000,50000,64000,80000,100000,128000,160000,200000,256000,512000,1024000]
         self.aperture_list = [0.95, 1.2, 1.4, 1.7, 1.8, 2, 2.8, 3.5, 4, 4.5, 5.6, 6.3, 7.1, 8, 11, 16, 22, 32]
         self.shutter_speed_list =[30, 25, 20, 15, 13, 10, 8, 6, 5 , 4, 3.2, 2.5 , 2, 1.6, 1.3, 1, 0.8, 0.6, 0.5, 0.4, 1/3, 1/4, 1/5, 1/6, 1/8, 1/10, 1/13, 1/15, 1/20, 1/25, 1/30, 1/40, 1/50, 1/60, 1/80, 1/100, 1/125, 1/160, 1/200, 1/250, 1/320, 1/400, 1/500, 1/640, 1/800, 1/1000, 1/1250, 1/1600, 1/2000, 1/2500, 1/3200, 1/4000, 1/5000, 1/6400, 1/8000]
         self.shutter_speed_str_list = ['30','25','20','15','13','10','8','6','5','4','3.2','2.5','2','1.6','1.3','1','0.8','0.6','0.5','0.4','1/3','1/4','1/5','1/6','1/8','1/10','1/13','1/15','1/20','1/25','1/30','1/40','1/50','1/60','1/80','1/100','1/125','1/160','1/200','1/250','1/320','1/400','1/500','1/640','1/800','1/1000','1/1250','1/1600','1/2000','1/2500','1/3200','1/4000','1/5000','1/6400','1/8000']
-        self.ev_srt_list=['0','-5.0','-4.67','-4.5','-4.33','-4.0','-3.67','-3.5','-3.33','-3.0','-2.67','-2.5','-2.33','-2.0','-1.67','-1.5','-1.33','-1.0','-0.67','-0.5','-0.33','+0.0','+0.33','+0.5','+0.67','+1.0','+1.33','+1.5','+1.67','+2.0','+2.33','+2.5','+2.67','+3.0','+3.33','+3.5','+3.67','+4.0','+4.33','+4.5','+4.67','+5.0']
+        self.ev_srt_list=['+0.0','-5.0','-4.67','-4.5','-4.33','-4.0','-3.67','-3.5','-3.33','-3.0','-2.67','-2.5','-2.33','-2.0','-1.67','-1.5','-1.33','-1.0','-0.67','-0.5','-0.33','+0.0','+0.33','+0.5','+0.67','+1.0','+1.33','+1.5','+1.67','+2.0','+2.33','+2.5','+2.67','+3.0','+3.33','+3.5','+3.67','+4.0','+4.33','+4.5','+4.67','+5.0']
         
         self.suitable_scene_list =[]
         # self.lux_value = 0
@@ -37,7 +38,6 @@ class LUX2EV(toga.App):
         label_iso = toga.Label('ISO: ')
         label_ev = toga.Label('EV: ')
         self.label_ev_value = toga.Label('  ')
-        self.label_ev_adjust = toga.Label('Adjusted')
         self.input_lux = toga.TextInput(placeholder='Input Lux', on_change=self.set_lux_value, style=Pack(width=80))
         self.select_iso = toga.Selection(items=self.iso_list, on_change=self.set_iso_value, style=Pack(width=80))
         self.select_ev_adjust = toga.Selection(items=self.ev_srt_list, on_change=self.set_ev_value, style=Pack(width=80))
@@ -55,7 +55,6 @@ class LUX2EV(toga.App):
         horizontal_layout_box2.add(label_ev)
         horizontal_layout_box2.add(self.label_ev_value)
         horizontal_layout_box2.add(self.select_ev_adjust)
-        horizontal_layout_box2.add(self.label_ev_adjust)
         horizontal_layout_box2.add(button_calcuate)
 
         # Center align the elements in horizontal_layout_box
@@ -117,10 +116,9 @@ class LUX2EV(toga.App):
         # 保留两位小数
         ev = round(ev * 10) / 10
         self.label_ev_value.text = str(ev)
-        ev_used = ev + float(self.ev_adjust_value)
+        ev_used = ev - float(self.ev_adjust_value)
         
         ev_used = round(ev_used * 10) / 10
-        self.label_ev_adjust.text = str(ev_used)
                    
         data = []
         for i in range(aperture_count):
@@ -148,7 +146,8 @@ class LUX2EV(toga.App):
             return ('Overexposure Warning')
 
 def main():
-    return LUX2EV()
+    # return LUX2EV()
+    return LUX2EV('Lux2Ev', 'easy.cam.lux2ev')
 
 if __name__ == '__main__':
     main().main_loop()
