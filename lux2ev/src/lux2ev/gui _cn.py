@@ -253,7 +253,7 @@ class MainScreen(toga.App):
         for i in [self.label_lux, self.input_lux, self.label_ev, self.label_ev_value, self.select_ev_adjust, self.label_nd, self.select_nd_adjust]:
             self.horizontal_layout_box1.add(i)
 
-        self.vertical_layout_box.add(self.horizontal_layout_box, self.horizontal_layout_box1)
+        self.vertical_layout_box.add(self.horizontal_layout_box1, self.horizontal_layout_box)
         # 创建主窗口
         self.main_window = toga.MainWindow(title=self.formal_name, size=(280, 480))
         self.main_window.content = self.vertical_layout_box
@@ -349,7 +349,7 @@ class MainScreen(toga.App):
         # 创建 Label 显示 "Shutter Speed (S): "
         self.d_label_shutter = toga.Label('快门速度 (秒): ')
         # 创建 TextInput 组件，用于输入 Shutter speed，当值改变时调用 set_shutter_value_d 方法
-        self.d_select_shutter = toga.TextInput(placeholder='30', on_change=self.set_shutter_value_d)
+        self.d_input_shutter = toga.TextInput(placeholder='输入快门速度', on_change=self.set_shutter_value_d)
         # 创建 Button 组件，点击时调用 calculate_d 方法
         self.d_button_calcuate = toga.Button('计算', on_press=self.calculate_d)        
         # 创建 Table 组件，包含两列 ["ISO", "Aperture"]，样式为 flex=1, alignment='center', text_align='center'
@@ -359,7 +359,7 @@ class MainScreen(toga.App):
         horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))
         # 将 Label 组件添加到布局框中
         horizontal_layout_box1.add(self.d_label_shutter)
-        horizontal_layout_box1.add(self.d_select_shutter)
+        horizontal_layout_box1.add(self.d_input_shutter)
         horizontal_layout_box1.add(self.d_button_calcuate)
         # 对布局框中的元素进行居中对齐和文本对齐居中处理
         for box in horizontal_layout_box1.children:
