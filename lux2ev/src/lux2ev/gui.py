@@ -1,3 +1,184 @@
+'''
+基于Beeware和Toga的LUX2EV软件
+版本号：V1.0
+# This project was generated with 0.3.16 using template: https://github.com/beeware/briefcase-template@v0.3.16
+[tool.briefcase]
+project_name = "LUX2EV"
+bundle = "easy.cam"
+version = "2023.12.24.1"
+url = "https://github.com/EasyCam/LUX2EV_beeware"
+license = "GNU General Public License v3 or later (GPLv3+)"
+author = "EasyCam"
+author_email = "hopephoto@outlook.com"
+
+[tool.briefcase.app.lux2ev]
+formal_name = "LUX2EV"
+description = "A very easy-to-use small software that uses the lux value measured by the illuminance meter to calculate the shutter speed under different ISO and aperture, and assist photography."
+long_description = """More details about the app should go here.
+"""
+icon = "src/lux2ev/resources/lux2ev"
+sources = [
+    "src/lux2ev",
+]
+test_sources = [
+    "tests",
+]
+
+requires = [
+    "matplotlib",
+    "numpy",
+    "pandas",
+]
+test_requires = [
+    "pytest",
+]
+
+[tool.briefcase.app.lux2ev.macOS]
+universal_build = true
+requires = [
+    "toga-cocoa~=0.4.0",
+    "std-nslog~=1.0.0"
+]
+
+[tool.briefcase.app.lux2ev.linux]
+requires = [
+    "toga-gtk~=0.4.0",
+]
+
+[tool.briefcase.app.lux2ev.linux.system.debian]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "libcairo2-dev",
+    # Needed to compile PyGObject wheel
+    "libgirepository1.0-dev",
+]
+
+system_runtime_requires = [
+    # Needed to provide GTK and its GI bindings
+    "gir1.2-gtk-3.0",
+    "libgirepository-1.0-1",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra-gtk3-module",
+    # Needed to provide WebKit2 at runtime
+    # "gir1.2-webkit2-4.0",
+]
+
+[tool.briefcase.app.lux2ev.linux.system.rhel]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo-gobject-devel",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection-devel",
+]
+
+system_runtime_requires = [
+    # Needed to support Python bindings to GTK
+    "gobject-introspection",
+    # Needed to provide GTK
+    "gtk3",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra-gtk3",
+    # Needed to provide WebKit2 at runtime
+    # "webkit2gtk3",
+]
+
+[tool.briefcase.app.lux2ev.linux.system.suse]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo-devel",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection-devel",
+]
+
+system_runtime_requires = [
+    # Needed to provide GTK
+    "gtk3",
+    # Needed to support Python bindings to GTK
+    "gobject-introspection", "typelib(Gtk)=3.0",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra-gtk3-0",
+    # Needed to provide WebKit2 at runtime
+    # "libwebkit2gtk3",
+    # "typelib(WebKit2)",
+]
+
+[tool.briefcase.app.lux2ev.linux.system.arch]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection",
+    # Runtime dependencies that need to exist so that the
+    # Arch package passes final validation.
+    # Needed to provide GTK
+    "gtk3",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra",
+    # Needed to provide WebKit2
+    # "webkit2gtk",
+]
+
+system_runtime_requires = [
+    # Needed to provide GTK
+    "gtk3",
+    # Needed to provide PyGObject bindings
+    "gobject-introspection-runtime",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra",
+    # Needed to provide WebKit2 at runtime
+    # "webkit2gtk",
+]
+
+[tool.briefcase.app.lux2ev.linux.appimage]
+manylinux = "manylinux2014"
+
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo-gobject-devel",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection-devel",
+    # Needed to provide GTK
+    "gtk3-devel",
+    # Dependencies that GTK looks for at runtime, that need to be
+    # in the build environment to be picked up by linuxdeploy
+    "libcanberra-gtk3",
+    "PackageKit-gtk3-module",
+    "gvfs-client",
+]
+linuxdeploy_plugins = [
+    "DEPLOY_GTK_VERSION=3 gtk",
+]
+
+[tool.briefcase.app.lux2ev.linux.flatpak]
+flatpak_runtime = "org.gnome.Platform"
+flatpak_runtime_version = "44"
+flatpak_sdk = "org.gnome.Sdk"
+
+[tool.briefcase.app.lux2ev.windows]
+requires = [
+    "toga-winforms~=0.4.0",
+]
+
+# Mobile deployments
+[tool.briefcase.app.lux2ev.iOS]
+requires = [
+    "toga-iOS~=0.4.0",
+    "std-nslog~=1.0.0"
+]
+
+[tool.briefcase.app.lux2ev.android]
+requires = [
+    "toga-android~=0.4.0"
+]
+
+# Web deployments
+[tool.briefcase.app.lux2ev.web]
+requires = [
+    "toga-web~=0.4.0",
+]
+style_framework = "Shoelace v2.3"
+'''
+
 import toga, math
 import numpy as np
 import pandas as pd
@@ -45,21 +226,21 @@ class MainScreen(toga.App):
         self.horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))
 
         # 创建按钮
-        button_a = toga.Button('ISO', style=Pack(flex=1), on_press=self.show_a)
-        button_b = toga.Button('F', style=Pack(flex=1), on_press=self.show_b)
-        button_c = toga.Button('S', style=Pack(flex=1), on_press=self.show_c)
-        button_d = toga.Button('Long', style=Pack(flex=1), on_press=self.show_d)
-        button_e = toga.Button('Home', style=Pack(flex=1), on_press=self.show_e)
+        button_a = toga.Button('感光度', style=Pack(flex=1), on_press=self.show_a)
+        button_b = toga.Button('光圈数', style=Pack(flex=1), on_press=self.show_b)
+        button_c = toga.Button('快门值', style=Pack(flex=1), on_press=self.show_c)
+        button_d = toga.Button('长曝光', style=Pack(flex=1), on_press=self.show_d)
+        button_e = toga.Button('主界面', style=Pack(flex=1), on_press=self.show_e)
 
         # 创建显示Lux值的标签和输入框
-        self.label_lux = toga.Label('Lux: ')
-        self.input_lux = toga.TextInput(placeholder='Input Lux', on_change=self.set_lux_value)
+        self.label_lux = toga.Label('照度值 LUX: ')
+        self.input_lux = toga.TextInput(placeholder='输入照度值', on_change=self.set_lux_value)
         # 创建显示EV值的标签和下拉框
-        self.label_ev = toga.Label('EV: ')
+        self.label_ev = toga.Label('电子伏 EV: ')
         self.label_ev_value = toga.Label('  ')
         self.select_ev_adjust = toga.Selection(items=self.ev_srt_list, on_change=self.set_ev_value)
         # 创建显示ND值的标签和下拉框
-        self.label_nd = toga.Label('ND: ')
+        self.label_nd = toga.Label('减光镜 ND: ')
         self.select_nd_adjust = toga.Selection(items=self.nd_str_list, on_change=self.set_nd_value)
 
         # 设置布局
@@ -89,15 +270,16 @@ class MainScreen(toga.App):
 
     def build_a(self):
         # 创建 Label 显示 "Select ISO"
-        self.a_label = toga.Label('Select ISO')
+        self.a_label = toga.Label('选择 ISO')
         # 创建 Label 显示 "ISO: "
         self.label_iso = toga.Label('ISO: ')
         # 创建 Selection 组件，用于选择 ISO 值，当值改变时调用 set_iso_value 方法
         self.select_iso = toga.Selection(items=self.iso_list, on_change=self.set_iso_value)
         # 创建 Button 组件，点击时调用 calculate 方法
-        self.button_calcuate = toga.Button('Calculate', on_press=self.calculate)
+        self.button_calcuate = toga.Button('计算', on_press=self.calculate)
         # 创建 Table 组件，包含两列 ["Aperture", "Shutter Speed"]，样式为 flex=1, alignment='center', text_align='center'
-        self.a_table_view = toga.Table(['Aperture', 'Shutter Speed'], style=Pack(flex=1,alignment='center',text_align='center'))        
+        self.a_table_view = toga.Table(['光圈', '快门'], 
+        style=Pack(flex=1,alignment='center',text_align='center'))
         self.a_button_save = toga.Button('保存', on_press=self.save_table_a)
         # 创建布局框，方向为纵向
         horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))  
@@ -112,17 +294,17 @@ class MainScreen(toga.App):
         self.a_content_list = [horizontal_layout_box1, self.a_table_view,self.a_button_save]
     
     def build_b(self):
-        # 创建 Label 显示 "Select Aperture"
-        self.b_label = toga.Label('Select Aperture')
-        # 创建 Label 显示 "Aperture (F/): "
-        self.b_label_aperture = toga.Label('Aperture (F/): ')
+        # 创建 Label 显示 "'选择光圈'"
+        self.b_label = toga.Label('选择光圈')
+        # 创建 Label 显示 "光圈值 (F/): "
+        self.b_label_aperture = toga.Label('光圈值 (F/): ')
         # 创建 Selection 组件，用于选择 Aperture 值，当值改变时调用 set_aperture_value 方法
         self.b_select_aperture = toga.Selection(items=self.aperture_list, on_change=self.set_aperture_value)
         # 创建 Button 组件，点击时调用 calculate_b 方法
-        self.b_button_calcuate = toga.Button('Calculate', on_press=self.calculate_b)
+        self.b_button_calcuate = toga.Button('计算', on_press=self.calculate_b)
         
         # 创建 Table 组件，包含两列 ["ISO", "Shutter Speed"]，样式为 flex=1, alignment='center', text_align='center'
-        self.b_table_view = toga.Table(['ISO', 'Shutter Speed'], style=Pack(flex=1,alignment='center',text_align='center'))
+        self.b_table_view = toga.Table(['感光度 ISO', '快门'], style=Pack(flex=1,alignment='center',text_align='center'))
         self.b_button_save = toga.Button('保存', on_press=self.save_table_b)
         # 创建布局框，方向为纵向
         horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))
@@ -137,19 +319,18 @@ class MainScreen(toga.App):
         self.b_content_list = [horizontal_layout_box1, self.b_table_view,self.b_button_save]
     
     def build_c(self):
-        # 创建 Label 显示 "Select Shutter"
-        self.c_label = toga.Label('Select Shutter')
-        # 创建 Label 显示 "Shutter Speed (S): "
-        self.c_label_shutter = toga.Label('Shutter Speed (S): ')
+        # 创建 Label 显示 "'选择快门'"
+        self.c_label = toga.Label('选择快门')
+        # 创建 Label 显示 "快门速度 (秒): "
+        self.c_label_shutter = toga.Label('快门速度 (秒): ')
         # 创建 Selection 组件，用于选择 Shutter 值，当值改变时调用 set_shutter_value 方法
         self.c_select_shutter = toga.Selection(items=self.shutter_speed_str_list, on_change=self.set_shutter_value)
         # 创建 Button 组件，点击时调用 calculate_c 方法
-        self.c_button_calcuate = toga.Button('Calculate', on_press=self.calculate_c)
+        self.c_button_calcuate = toga.Button('计算', on_press=self.calculate_c)
         
         # 创建 Table 组件，包含两列 ["ISO", "Aperture"]，样式为 flex=1, alignment='center', text_align='center'
-        self.c_table_view = toga.Table(['ISO', 'Aperture'], style=Pack(flex=1,alignment='center',text_align='center'))
+        self.c_table_view = toga.Table(['感光度 ISO', '光圈'], style=Pack(flex=1,alignment='center',text_align='center'))
         self.c_button_save = toga.Button('保存', on_press=self.save_table_c)
-
         # 创建布局框，方向为纵向
         horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))
         # 将 Label 组件添加到布局框中
@@ -164,15 +345,15 @@ class MainScreen(toga.App):
     
     def build_d(self):
         # 创建 Label 显示 "Long Exposure."
-        self.d_label = toga.Label('Long Exposure.')
+        self.d_label = toga.Label('长曝光')
         # 创建 Label 显示 "Shutter Speed (S): "
-        self.d_label_shutter = toga.Label('Shutter Speed (S): ')
+        self.d_label_shutter = toga.Label('快门速度 (秒): ')
         # 创建 TextInput 组件，用于输入 Shutter speed，当值改变时调用 set_shutter_value_d 方法
         self.d_input_shutter = toga.TextInput(placeholder='输入快门速度', on_change=self.set_shutter_value_d)
         # 创建 Button 组件，点击时调用 calculate_d 方法
-        self.d_button_calcuate = toga.Button('Calculate', on_press=self.calculate_d)        
+        self.d_button_calcuate = toga.Button('计算', on_press=self.calculate_d)        
         # 创建 Table 组件，包含两列 ["ISO", "Aperture"]，样式为 flex=1, alignment='center', text_align='center'
-        self.d_table_view = toga.Table(['ISO', 'Aperture'], style=Pack(flex=1,alignment='center',text_align='center'))        
+        self.d_table_view = toga.Table(['感光度 ISO', '光圈'], style=Pack(flex=1,alignment='center',text_align='center'))
         self.d_button_save = toga.Button('保存', on_press=self.save_table_d)
         # 创建布局框，方向为纵向
         horizontal_layout_box1 = toga.Box(style=Pack(direction=ROW))
@@ -188,14 +369,14 @@ class MainScreen(toga.App):
     
     def build_e(self):
         # 创建 Label 显示介绍性文字
-        self.e_label = toga.Label('\nInput Lux value and then choose a Mode:\n\n')
+        self.e_label = toga.Label('\n输入照度值 LUX 然后选择计算模式\n\n')
         # 创建 Description 组件，用于显示关于如何选择值的说明文字
-        self.e_description = toga.Label('''ISO: Select ISO to get Aperture and Shutter.\n\nF: Select Aperture (F value) to get ISO and Shutter.\n\nS: Select Shutter speed to get ISO and Aperture.\n\nLong: Input Shutter speed to get ISO and Aperture. ''')
+        self.e_description = toga.Label('''感光度: 选择感光度ISO然后计算光圈和对应的快门速度.\n\n光圈数:选择光圈大小然后计算感光度ISO和对应的快门速度.\n\nS:快门值：选择快门速度然后计算感光度ISO和对应的光圈数.\n\n长曝光: 输入曝光时间值然后计算感光度ISO和对应的光圈数. ''')
         # 将组件列表添加到 e_content_list 中
         self.e_content_list = [self.e_label, self.e_description]
     
     def show_a(self, widget):
-        self.main_window.title = self.formal_name + '\tSelect ISO to get Aperture and Shutter.'
+        self.main_window.title = self.formal_name + '\t\t选择感光度ISO然后计算光圈和对应的快门速度'
         # 将 a_content_list 中的组件添加到垂直布局框中
         for item in self.a_content_list:
             self.vertical_layout_box.add(item)
@@ -213,7 +394,7 @@ class MainScreen(toga.App):
             self.vertical_layout_box.remove(item)
 
     def show_b(self, widget):
-        self.main_window.title = self.formal_name + '\tSelect Aperture (F value) to get ISO and Shutter .'
+        self.main_window.title = self.formal_name + '\t\t选择光圈大小然后计算感光度ISO和对应的快门速度'
         # 移除 a_content_list 中的组件
         for item in self.a_content_list:
             self.vertical_layout_box.remove(item)
@@ -231,7 +412,7 @@ class MainScreen(toga.App):
             self.vertical_layout_box.remove(item)
 
     def show_c(self, widget):
-        self.main_window.title = self.formal_name + '\tSelect Shutter speed to get ISO and Aperture.'
+        self.main_window.title = self.formal_name + '\t\t选择快门速度然后计算感光度ISO和对应的光圈数'
         # 移除 a_content_list 中的组件
         for item in self.a_content_list:
             self.vertical_layout_box.remove(item)
@@ -249,7 +430,7 @@ class MainScreen(toga.App):
             self.vertical_layout_box.remove(item)
 
     def show_d(self, widget):
-        self.main_window.title = self.formal_name + '\tInput Shutter speed to get ISO and Aperture.' 
+        self.main_window.title = self.formal_name + '\t\t输入曝光时间值然后计算感光度ISO和对应的光圈数'
         # 移除 a_content_list 中的组件
         for item in self.a_content_list:
             self.vertical_layout_box.remove(item)
@@ -267,6 +448,8 @@ class MainScreen(toga.App):
             self.vertical_layout_box.remove(item)
 
     def show_e(self, widget):
+        
+        self.main_window.title = self.formal_name
         # 移除 a_content_list 中的组件
         for item in self.a_content_list:
             self.vertical_layout_box.remove(item)
@@ -282,7 +465,7 @@ class MainScreen(toga.App):
         # 将 e_content_list 中的组件添加到垂直布局框中
         for item in self.e_content_list:
             self.vertical_layout_box.add(item)
-
+    
 
 
     def save_table_a(self, widget):
@@ -333,6 +516,7 @@ class MainScreen(toga.App):
         else:
             file_path = 'd.csv'
         self.d_df.to_csv(file_path, encoding='gbk',index=False)
+
 
 
     def clear_content(self):
@@ -424,8 +608,9 @@ class MainScreen(toga.App):
         ev_used = ev - float(self.ev_adjust_value)
         
         ev_used = round(ev_used * 10) / 10
-        ev_used = ev_used/(self.nd_adjust_value)
+        ev_used = ev_used*(self.nd_adjust_value)
                    
+        
         data = []
         for i in range(aperture_count):
             aperture = self.aperture_list[i]
@@ -433,7 +618,7 @@ class MainScreen(toga.App):
             data.append([str(aperture), '\''+str(shutter_speed)+'\''])
             self.a_table_view.data.append([str(aperture), str(shutter_speed)])
         self.a_df =pd.DataFrame(data)
-        self.a_df.columns = ['Aperture', 'Shutter']        
+        self.a_df.columns = ['光圈F值', '快门速度']        
         print(self.a_df)
 
     def calculate_b(self, widget):
@@ -462,7 +647,7 @@ class MainScreen(toga.App):
             data.append([str(iso), '\''+str(shutter_speed)+'\''])
             self.b_table_view.data.append([str(iso), str(shutter_speed)])
         self.b_df =pd.DataFrame(data)
-        self.b_df.columns = ['ISO', 'Shutter']        
+        self.b_df.columns = ['感光度ISO', '快门速度']     
         print(self.b_df)
 
     def calculate_c(self, widget):
@@ -488,10 +673,12 @@ class MainScreen(toga.App):
         for i in range(iso_count):
             iso = self.iso_list[i]
             aperture = self.calculate_aperture(shutter_speed, ev_used, iso)
-            data.append([str(iso), '\''+str(aperture)+'\''])
-            self.c_table_view.data.append([str(iso), str(aperture)])
+            # if aperture != 'Took Dark':
+            #     pass
+            data.append([str(iso), aperture])
+            self.c_table_view.data.append([str(iso), aperture])
         self.c_df =pd.DataFrame(data)
-        self.c_df.columns = ['ISO', 'Aperture']        
+        self.c_df.columns = ['感光度ISO', '光圈F值']     
         print(self.c_df)
 
     def calculate_d(self, widget):
@@ -517,10 +704,12 @@ class MainScreen(toga.App):
         for i in range(iso_count):
             iso = self.iso_list[i]
             aperture = self.calculate_aperture(shutter_speed, ev_used, iso)
-            data.append([str(iso), '\''+str(aperture)+'\''])
-            self.d_table_view.data.append([str(iso), str(aperture)])
+            # if aperture != 'Took Dark':
+            #     pass
+            data.append([str(iso), aperture])
+            self.d_table_view.data.append([str(iso), aperture])
         self.d_df =pd.DataFrame(data)
-        self.d_df.columns = ['ISO', 'Aperture']        
+        self.d_df.columns = ['感光度ISO', '光圈F值']     
         print(self.d_df)
 
     # 根据ISO计算光圈和对应快门速度
@@ -539,26 +728,32 @@ class MainScreen(toga.App):
             return str(int(shutter_speed))
         # 如果快门速度小于1/8000，则返回“Too Fast”
         else:
-            return ('Faster Than 1/8000')
+            return ('超过 1/8000')
 
 
     # 根据快门速度计算ISO和对应光圈
     def calculate_aperture(self,shutter_speed,ev,iso):        
         # shutter_speed = (aperture*aperture/np.power(2,ev)*100/iso)
-        aperture = math.sqrt(shutter_speed *(np.power(2,ev)/100*iso))
-        print('Calculated aperture is ',aperture)
-        if 0.95 <= aperture <= 32:
-            aperture_list = self.aperture_list
-            aperture_str_list = self.aperture_str_list
-            closest_aperture= min(aperture_list, key=lambda x: abs(x - aperture))
-            closest_aperture_index = aperture_list.index(closest_aperture)
-            return str(aperture_str_list[closest_aperture_index])
-        # 如果光圈数值大于30，则返回"Too Small"
-        elif aperture > 32:
-            return (str(int(aperture))+' Not Small Enough')
-        # 如果光圈数值小于0.95，则返回"Too Big"
-        else:
-            return ('Not Big Enough')
+        try:
+            aperture = math.sqrt(shutter_speed *(np.power(2,ev)/100*iso))
+            print('Calculated aperture is ',aperture)
+            if 0.95 <= aperture <= 32:
+                aperture_list = self.aperture_list
+                aperture_str_list = self.aperture_str_list
+                closest_aperture= min(aperture_list, key=lambda x: abs(x - aperture))
+                closest_aperture_index = aperture_list.index(closest_aperture)
+                return str(aperture_str_list[closest_aperture_index])
+            # 如果光圈数值大于30，则返回"Too Small"
+            elif 64>= aperture > 32:
+                return (str(int(aperture))+' 光圈可能不够小')
+            # 如果光圈数值大于30，则返回"Too Small"
+            elif aperture > 64:
+                return ('光圈不够小')
+            # 如果光圈数值小于0.95，则返回"Too Big"
+            else:
+                return ('光圈不够大')
+        except OverflowError:
+            return ('不可用')
         
 
 
