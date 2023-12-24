@@ -293,6 +293,19 @@ $$
 
 ## 4 获取帮助
 
+本软件的操作演示视频，可以参考：
+Android ：
+![](./images/video.mp4)。
+Windows ：
+![](./images/video_windows.mp4)。
+
+如果您在使用过程中遇到任何问题，可以到[本软件项目的开源页面](https://github.com/EasyCam/LUX2EV_beeware/issues/new/choose)提交问题。
+
+## 5 许可和致谢
+
+本软件使用 GPL-v3 许可证，详情参见 [LICENSE]()
+
+
 如果在使用中遇到任何困难，可以随时到[本软件项目的开源页面](https://github.com/EasyCam/LUX2EV_beeware/issues/new/choose)提交问题。
 
 ## 5 许可和致谢
