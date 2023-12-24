@@ -27,7 +27,7 @@ LUX2EV_beeware 是一个用于摄影曝光参数计算的图形界面工具软�
 在软件中，用户可以选择不同的 ISO 感光度，并通过滑动条调整光圈大小，以便在不同光圈下计算出最佳的曝光参数。这样，摄影师可以更加专注于构图和创作，而不必过多关注曝光参数的调整。
 
 软件的功能流程设计如下：
-![](./images/流程图.svg)
+![](./images/流程图.jpg)
 
 
 ### 1.3 开发环境
@@ -299,8 +299,8 @@ $$
 
 如果您需要获取关于本软件的帮助，可以参考以下资源：
 - 操作演示视频：您可以观看本软件的操作演示视频，具体参考以下链接：
-    - Android：![](./images/video.mp4)。
-    - Windows：![](./images/video_windows.mp4)。
+    - [Android 视频](https://github.com/EasyCam/LUX2EV_beeware/blob/main/images/video.mp4)。
+    - [Windows 视频](https://github.com/EasyCam/LUX2EV_beeware/blob/main/images/video_windows.mp4)。
 - 提交问题：如果您在使用过程中遇到任何问题，可以到[本软件项目的开源页面](https://github.com/EasyCam/LUX2EV_beeware/issues/new/choose)提交问题。
 
 ## 5 许可和致谢

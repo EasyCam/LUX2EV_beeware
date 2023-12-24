@@ -299,8 +299,8 @@ $$
 
 如果您需要获取关于本软件的帮助，可以参考以下资源：
 - 操作演示视频：您可以观看本软件的操作演示视频，具体参考以下链接：
-    - Android：![](./images/video.mp4)。
-    - Windows：![](./images/video_windows.mp4)。
+    - [Android 视频](https://github.com/EasyCam/LUX2EV_beeware/blob/main/images/video.mp4)。
+    - [Windows 视频](https://github.com/EasyCam/LUX2EV_beeware/blob/main/images/video_windows.mp4)。
 - 提交问题：如果您在使用过程中遇到任何问题，可以到[本软件项目的开源页面](https://github.com/EasyCam/LUX2EV_beeware/issues/new/choose)提交问题。
 
 ## 5 许可和致谢
