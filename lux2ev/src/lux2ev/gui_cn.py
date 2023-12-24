@@ -5,7 +5,7 @@
 [tool.briefcase]
 project_name = "LUX2EV"
 bundle = "easy.cam"
-version = "2023.12.24.1"
+version = "1.0"
 url = "https://github.com/EasyCam/LUX2EV_beeware"
 license = "GNU General Public License v3 or later (GPLv3+)"
 author = "EasyCam"
