@@ -1,3 +1,184 @@
+'''
+基于Beeware和Toga的LUX2EV软件
+版本号：V1.0
+# This project was generated with 0.3.16 using template: https://github.com/beeware/briefcase-template@v0.3.16
+[tool.briefcase]
+project_name = "LUX2EV"
+bundle = "easy.cam"
+version = "2023.12.24.1"
+url = "https://github.com/EasyCam/LUX2EV_beeware"
+license = "GNU General Public License v3 or later (GPLv3+)"
+author = "EasyCam"
+author_email = "hopephoto@outlook.com"
+
+[tool.briefcase.app.lux2ev]
+formal_name = "LUX2EV"
+description = "A very easy-to-use small software that uses the lux value measured by the illuminance meter to calculate the shutter speed under different ISO and aperture, and assist photography."
+long_description = """More details about the app should go here.
+"""
+icon = "src/lux2ev/resources/lux2ev"
+sources = [
+    "src/lux2ev",
+]
+test_sources = [
+    "tests",
+]
+
+requires = [
+    "matplotlib",
+    "numpy",
+    "pandas",
+]
+test_requires = [
+    "pytest",
+]
+
+[tool.briefcase.app.lux2ev.macOS]
+universal_build = true
+requires = [
+    "toga-cocoa~=0.4.0",
+    "std-nslog~=1.0.0"
+]
+
+[tool.briefcase.app.lux2ev.linux]
+requires = [
+    "toga-gtk~=0.4.0",
+]
+
+[tool.briefcase.app.lux2ev.linux.system.debian]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "libcairo2-dev",
+    # Needed to compile PyGObject wheel
+    "libgirepository1.0-dev",
+]
+
+system_runtime_requires = [
+    # Needed to provide GTK and its GI bindings
+    "gir1.2-gtk-3.0",
+    "libgirepository-1.0-1",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra-gtk3-module",
+    # Needed to provide WebKit2 at runtime
+    # "gir1.2-webkit2-4.0",
+]
+
+[tool.briefcase.app.lux2ev.linux.system.rhel]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo-gobject-devel",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection-devel",
+]
+
+system_runtime_requires = [
+    # Needed to support Python bindings to GTK
+    "gobject-introspection",
+    # Needed to provide GTK
+    "gtk3",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra-gtk3",
+    # Needed to provide WebKit2 at runtime
+    # "webkit2gtk3",
+]
+
+[tool.briefcase.app.lux2ev.linux.system.suse]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo-devel",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection-devel",
+]
+
+system_runtime_requires = [
+    # Needed to provide GTK
+    "gtk3",
+    # Needed to support Python bindings to GTK
+    "gobject-introspection", "typelib(Gtk)=3.0",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra-gtk3-0",
+    # Needed to provide WebKit2 at runtime
+    # "libwebkit2gtk3",
+    # "typelib(WebKit2)",
+]
+
+[tool.briefcase.app.lux2ev.linux.system.arch]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection",
+    # Runtime dependencies that need to exist so that the
+    # Arch package passes final validation.
+    # Needed to provide GTK
+    "gtk3",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra",
+    # Needed to provide WebKit2
+    # "webkit2gtk",
+]
+
+system_runtime_requires = [
+    # Needed to provide GTK
+    "gtk3",
+    # Needed to provide PyGObject bindings
+    "gobject-introspection-runtime",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra",
+    # Needed to provide WebKit2 at runtime
+    # "webkit2gtk",
+]
+
+[tool.briefcase.app.lux2ev.linux.appimage]
+manylinux = "manylinux2014"
+
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo-gobject-devel",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection-devel",
+    # Needed to provide GTK
+    "gtk3-devel",
+    # Dependencies that GTK looks for at runtime, that need to be
+    # in the build environment to be picked up by linuxdeploy
+    "libcanberra-gtk3",
+    "PackageKit-gtk3-module",
+    "gvfs-client",
+]
+linuxdeploy_plugins = [
+    "DEPLOY_GTK_VERSION=3 gtk",
+]
+
+[tool.briefcase.app.lux2ev.linux.flatpak]
+flatpak_runtime = "org.gnome.Platform"
+flatpak_runtime_version = "44"
+flatpak_sdk = "org.gnome.Sdk"
+
+[tool.briefcase.app.lux2ev.windows]
+requires = [
+    "toga-winforms~=0.4.0",
+]
+
+# Mobile deployments
+[tool.briefcase.app.lux2ev.iOS]
+requires = [
+    "toga-iOS~=0.4.0",
+    "std-nslog~=1.0.0"
+]
+
+[tool.briefcase.app.lux2ev.android]
+requires = [
+    "toga-android~=0.4.0"
+]
+
+# Web deployments
+[tool.briefcase.app.lux2ev.web]
+requires = [
+    "toga-web~=0.4.0",
+]
+style_framework = "Shoelace v2.3"
+'''
+
 import toga, math
 import numpy as np
 import pandas as pd
