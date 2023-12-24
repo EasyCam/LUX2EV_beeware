@@ -153,7 +153,7 @@ briefcase run Android # 开始运行
 注意，上述过程中，beeware框架需要联网下载安装 Android 设备上运行 APP 所需要的第三方组件，因此可能花费较长时间，甚至可能因为网络稳定性等多方面因素而导致中断。
 
 另外，Android 设备由于具有多样的分辨率设置，可能出现界面文字不全等情况，但并不影响软件的正常运行。如下所示：
-![](./images/ScreenshotOnAndroid.jpg){ width=720 }
+![](./images/ScreenshotOnAndroid.jpg){ width=360 }
 
 ## 3. 功能与使用
 
