@@ -263,8 +263,10 @@ $$
 
 ![](./images/长曝光优先状态.png){ width=720 }
 
-#### 3.5.5 其他注意事项
 
+### 3.6 数据呈现
+
+在数据呈现部分，用户可以看到当前状态下经过计算所得到的曝光参数组合结果表。
 本软件内置了对异常情境的预报功能。
 当计算得到的快门值小于1/8000秒则会被提示“超过1/8000”。
 
@@ -276,15 +278,42 @@ $$
 ![](./images/光圈不够小.png){ width=720 }
 ![](./images/光圈不够大.png){ width=720 }
 
+在数据呈现部分的低端，每个状态下都有一个保存按钮。
+点击该按钮，当前数据会被保存成对应的CSV文档。
+软件会自动侦测操作系统版本：
+* 如果为 Android 操作系统，则会保存在设备的 Download 路径下，具体位置为 `/storage/emulated/0/Download/` 路径下;
+* 如果为 GNU/Linux 操作系统，用户需要手动建立一个 `/storage/emulated/0/Download/` 路径，以保存当前数据文件;
+* 如果为 Windows 操作系统，则会保存在当前程序调用目录下，一般来说默认位置在 `C:\Windows\System32` 路径下，需要手动复制或移动到诸如桌面之类的方便目录，再进行打开编辑。
+
+这种措施是由于考虑到兼容多种系统的文件保存而迫不得已采取的。
+
+保存的 CSV 数据文件可以使用各种表格编辑软件或者文本编辑器打开，如下图所示：
+![](./images/打开表格.png){ width=720 })
 
 
+## 4 获取帮助
 
+如果在使用中遇到任何困难，可以随时到[本软件项目的开源页面](https://github.com/EasyCam/LUX2EV_beeware/issues/new/choose)提交问题。
 
-### 3.6 数据呈现
+## 5 许可和致谢
 
-在结果呈现部分，用户可以看到当前状态下的各个次级项目值，以及计算按钮。
-* 各个次级项目值，包括：当前照度、当前电子、当前感光度、当前光圈数、当前快门
+本软件使用 GPL-v3 许可证，详情参见 [LICENSE](https://github.com/EasyCam/LUX2EV_beeware/blob/main/LICENSE) 文件。
 
+本软件衍生自早期的PyQt6案例 [LUX2EV](https://github.com/EasyCam/LUX2EV),
+感谢关心和而帮助 [EasyCam](https://github.com/EasyCam) 的其他人员。
 
-### 3.7 结果保存
+本软件的参考资料主要来自以下项目：
 
+* [LUX2EV]()
+感谢以下开源项目：
+
+* [Beeware](https://beeware.org/)
+* [Toga](https://toga.readthedocs.io/en/latest/)
+* [Pandas](https://pandas.pydata.org/)
+* [NumPy](https://numpy.org/)
+* [PyQt6](https://www.riverbankcomputing.com/software/pyqt/intro)
+* [PySide6](https://wiki.qt.io/Qt_for_Python)
+* [PyQt5](https://riverbankcomputing.com/software/pyqt/intro)
+* [PyQtGraph](https://pyqtgraph.readthedocs.io/en/latest/)
+* [PyInstaller](https://www.pyinstaller.org/)
+* [PyQt5-tools](https://pypi.org/project/PyQt5-tools/)
