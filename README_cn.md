@@ -90,7 +90,7 @@ briefcase run # 开始运行
 ```
 
 界面如下图所示：
-![](./images/RunOnUbuntu.png)
+![](./images/RunOnUbuntu.png){ width=720 }
 
 #### 2.3.2 Windows 下绿色运行
 
@@ -103,7 +103,7 @@ briefcase run # 开始运行
 
 
 界面如下图所示：
-![](./images/RunOnWindowsZIP.png)
+![](./images/RunOnWindowsZIP.png){ width=720 }
 
 
 #### 2.3.3 Windows 下MSI安装运行
@@ -116,13 +116,13 @@ briefcase run # 开始运行
 * 完成安装后，到开始菜单中找到 LUX2EV 的启动按钮，点击即可启动软件。
 
 安装如下面几张图片所示：
-![](./images/InstallMSI1.png)
-![](./images/InstallMSI2.png)
-![](./images/InstallMSI3.png)
-![](./images/InstallMSI4.png)
+![](./images/InstallMSI1.png){ width=720 }
+![](./images/InstallMSI2.png){ width=720 }
+![](./images/InstallMSI3.png){ width=720 }
+![](./images/InstallMSI4.png){ width=720 }
 
 界面如下图所示：
-![](./images/RunOnWindowsMSI.png)
+![](./images/RunOnWindowsMSI.png){ width=720 }
 
 
 #### 2.3.4 Android 平台运行
@@ -153,7 +153,7 @@ briefcase run Android # 开始运行
 注意，上述过程中，beeware框架需要联网下载安装 Android 设备上运行 APP 所需要的第三方组件，因此可能花费较长时间，甚至可能因为网络稳定性等多方面因素而导致中断。
 
 另外，Android 设备由于具有多样的分辨率设置，可能出现界面文字不全等情况，但并不影响软件的正常运行。如下所示：
-![](./images/ScreenshotOnAndroid.jpg)
+![](./images/ScreenshotOnAndroid.jpg){ width=720 }
 
 ## 3. 功能与使用
 
@@ -183,17 +183,17 @@ $$
 首先，启动软件，Windows 10 用户可以使用 MSI 安装包安装后，在开始菜单中搜索到 LUX2EV 来启动。
 其他操作系统用户可以参考上一章节的内容来启动。
 
-![](./images/InstallMSI4.png)
+![](./images/InstallMSI4.png){ width=720 }
 
 软件启动后，首先可以看到主界面，以及主界面上的菜单栏。
 需要注意的是，这里的菜单栏可能会随着用户所使用的操作系统不同而稍有形貌上的变化。
 但具体功能内容基本一致。
 
 主界面使用快捷键 Ctrl+Q 可以退出软件。
-![](./images/退出.png)
+![](./images/退出.png){ width=720 }
 
 菜单栏当中的 Help 项目下有访问主页和检查当前版本两项功能，如下图所示：
-![](./images/帮助.png)
+![](./images/帮助.png){ width=720 }
 
 
 ### 3.3 主界面
@@ -203,7 +203,7 @@ $$
 * 第二部分为状态切换，包括五个状态切换按钮：主界面、感光度、光圈数、快门值、长曝光；
 * 第三部分为数据呈现，包括当前状态下的次级项目值筛选或输入框，当前状态下的计算按钮，当前数据表格，以及保存结果按钮。
 
-![](./images/主界面.png)
+![](./images/主界面.png){ width=720 }
 
 ### 3.4 照度控制
 
@@ -236,7 +236,7 @@ $$
 这里的ISO调整范围和选值，参考了索尼A450单反相机和索尼A7R5微单相机的参数。
 选择好了ISO之后，点击“计算”按钮，就可以在数据呈现部分中给出当前状态下的各档光圈数和对应的快门值。
 
-![](./images/感光度优先状态.png)
+![](./images/感光度优先状态.png){ width=720 }
 
 #### 3.5.2 光圈数优先状态
 
@@ -244,7 +244,7 @@ $$
 
 这里的光圈数选好之后，点击“计算”按钮，就可以在数据呈现部分中给出当前状态下的各档感光度和对应的快门值。
 
-![](./images/光圈数优先状态.png)
+![](./images/光圈数优先状态.png){ width=720 }
 
 #### 3.5.3 快门值优先状态
 
@@ -252,7 +252,7 @@ $$
 
 这里的快门值选好之后，点击“计算”按钮，就可以在数据呈现部分中给出当前状态下的各档感光度和对应的光圈数。
 
-![](./images/快门值优先状态.png)
+![](./images/快门值优先状态.png){ width=720 }
         
 
 #### 3.5.4 长曝光优先状态
@@ -261,20 +261,20 @@ $$
 
 这里的快门值输入好之后，点击“计算”按钮，就可以在数据呈现部分中给出当前状态下的各档感光度和对应的光圈数。
 
-![](./images/长曝光优先状态.png)
+![](./images/长曝光优先状态.png){ width=720 }
 
 #### 3.5.5 其他注意事项
 
 本软件内置了对异常情境的预报功能。
 当计算得到的快门值小于1/8000秒则会被提示“超过1/8000”。
 
-![](./images/超过1比8000.png)
+![](./images/超过1比8000.png){ width=720 }
 
 当计算得到的光圈数值超过0.95到32的范围，该软件都会在输出光圈的同时加以提示。
 光圈数值大于32的会被提示“光圈可能不够小”，若光圈数小于0.95则会被提示“光圈可能不够大”。
 
-![](./images/光圈不够小.png)
-![](./images/光圈不够大.png)
+![](./images/光圈不够小.png){ width=720 }
+![](./images/光圈不够大.png){ width=720 }
 
 
 
