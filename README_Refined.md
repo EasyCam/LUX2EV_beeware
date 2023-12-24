@@ -27,7 +27,9 @@ LUX2EV_beeware 是一个用于摄影曝光参数计算的图形界面工具软�
 在软件中，用户可以选择不同的 ISO 感光度，并通过滑动条调整光圈大小，以便在不同光圈下计算出最佳的曝光参数。这样，摄影师可以更加专注于构图和创作，而不必过多关注曝光参数的调整。
 
 软件的功能流程设计如下：
+
 ![](./images/流程图.svg)
+
 
 
 ### 1.3 开发环境
@@ -91,7 +93,9 @@ briefcase run # 开始运行
 ```
 
 界面如下图所示：
+
 ![](./images/RunOnUbuntu.png)
+
 
 #### 2.3.2 Windows 下绿色运行
 
@@ -106,7 +110,9 @@ briefcase run # 开始运行
 
 
 界面如下图所示：
+
 ![](./images/RunOnWindowsZIP.png)
+
 
 
 #### 2.3.3 Windows 下MSI安装运行
@@ -124,13 +130,23 @@ briefcase run # 开始运行
 
 
 安装如下面几张图片所示：
+
 ![](./images/InstallMSI1.png)
+
+
 ![](./images/InstallMSI2.png)
+
+
 ![](./images/InstallMSI3.png)
+
+
 ![](./images/InstallMSI4.png)
 
+
 界面如下图所示：
+
 ![](./images/RunOnWindowsMSI.png)
+
 
 
 #### 2.3.4 Android 平台运行
@@ -147,13 +163,6 @@ briefcase run # 开始运行
 8. 使用 briefcase build Android 命令生成 APK 文件。
 9. 使用 briefcase run Android 命令运行本软件。
 
-请在终端中执行以上命令来完成这个运行过程。在 Windows 下使用 Powershell，在 Linux 和 macOS 下使用 BASH 或 ZSH。
-
-这种运行过程需要联网下载安装 Android 设备上运行 APP 所需的第三方组件，因此可能需要较长时间，甚至可能因网络稳定性等多方面因素而中断。
-
-请注意，由于 Android 设备具有多样的分辨率设置，界面上可能出现文字不全等情况，但不会影响软件的正常运行。如下图所示：
-![](./images/ScreenshotOnAndroid.jpg){ width=360 }
-
 ```Bash
 pip install beeware briefcase toga # 安装依赖包
 git clone https://github.com/EasyCam/LUX2EV_beeware # 下载源代码
@@ -163,10 +172,15 @@ briefcase build Android # 生成 APK 文件
 briefcase run Android # 开始运行
 ```
 
+
+请在终端中执行以上命令来完成这个运行过程。在 Windows 下使用 Powershell，在 Linux 和 macOS 下使用 BASH 或 ZSH。
+
 请注意，在上述过程中，beeware框架需要联网下载并安装Android设备上运行所需的第三方组件。因此，这可能需要较长的时间，并且可能会因网络稳定性等多种因素而导致中断。
 
 此外，由于Android设备具有多样的分辨率设置，界面上可能会出现文字不全等情况。但是，这不会影响软件的正常运行。如下图所示：
-![](./images/ScreenshotOnAndroid.jpg){ width=360 }
+
+![](./images/ScreenshotOnAndroid.jpg)
+
 
 ## 3. 功能与使用
 
@@ -194,14 +208,19 @@ $$
 
 首先，启动软件。对于 Windows 10 用户，可以使用 MSI 安装包进行安装，然后在开始菜单中搜索 LUX2EV 来启动软件。其他操作系统的用户可以参考前一章节的内容来启动软件。
 
+
 ![](./images/InstallMSI4.png)
+
 在软件启动后，您将首先看到主界面以及位于主界面上方的菜单栏。需要注意的是，菜单栏的外观可能会因用户所使用的操作系统而略有不同，但其功能内容基本一致。
 
 主界面提供了一个快捷键 Ctrl+Q，用于退出软件。
+
 ![](./images/退出.png)
+
 菜单栏中的 Help 项目下包含了访问主页和检查当前版本的功能，如下图所示：
 
 ![Help菜单](./images/帮助.png)
+
 
 ### 3.3 主界面
 
@@ -211,6 +230,7 @@ $$
 3. 数据呈现：包括当前状态下的次级项目值筛选或输入框、当前状态下的计算按钮、当前数据表格以及保存结果按钮。
 
 ![主界面](./images/主界面.png)
+
 
 ### 3.4 照度控制
 
@@ -244,7 +264,9 @@ $$
 选择好了ISO之后，点击“计算”按钮，就可以在数据呈现部分中给出当前状态下的各档光圈数和对应的快门值。
 选择ISO后，点击“计算”按钮，数据呈现部分将显示当前状态下的各档光圈数和对应的快门值。
 
+
 ![](./images/感光度优先状态.png)
+
 
 #### 3.5.2 光圈数优先状态
 
@@ -252,7 +274,9 @@ $$
 
 选择光圈数后，点击“计算”按钮，数据呈现部分将显示当前状态下的各档感光度和对应的快门值。
 
+
 ![](./images/光圈数优先状态.png)
+
 
 #### 3.5.3 快门值优先状态
 
@@ -260,7 +284,9 @@ $$
 
 选择快门值后，点击“计算”按钮，数据呈现部分将显示当前状态下的各档感光度和对应的光圈数。
 
+
 ![](./images/快门值优先状态.png)
+
         
 
 #### 3.5.4 长曝光优先状态
@@ -269,7 +295,9 @@ $$
 
 在长曝光优先状态下，用户可以输入所需的快门值，并点击“计算”按钮，即可在数据呈现部分中获取相应的感光度和光圈数。
 
+
 ![](./images/长曝光优先状态.png)
+
 
 ### 3.6 数据呈现
 
@@ -277,12 +305,18 @@ $$
 
 当计算得到的快门值小于1/8000秒时，用户会收到提示信息“超过1/8000”。
 
+
 ![](./images/超过1比8000.png)
+
 
 当计算得到的光圈数值超过0.95到32的范围时，软件会在输出光圈的同时给出相应的提示。如果光圈数值大于32，用户会收到提示信息“光圈可能不够小”。而如果光圈数值小于0.95，用户会收到提示信息“光圈可能不够大”。
 
+
 ![](./images/光圈不够小.png)
+
+
 ![](./images/光圈不够大.png)
+
 
 在数据呈现部分的底部，每个状态下都有一个保存按钮。用户可以点击该按钮，将当前数据保存为对应的CSV文档。软件会自动检测操作系统版本：
 * 如果是Android操作系统，数据将保存在设备的Download路径下，具体位置为`/storage/emulated/0/Download/`。
@@ -292,7 +326,9 @@ $$
 这种措施是为了兼容多种操作系统的文件保存而采取的。
 
 保存的CSV数据文件可以使用各种表格编辑软件或文本编辑器打开，如下图所示：
+
 ![](./images/打开表格.png)
+
 
 
 ## 4 获取帮助
@@ -321,3 +357,4 @@ $$
     - [PyQtGraph](https://pyqtgraph.readthedocs.io/en/latest/)
     - [PyInstaller](https://www.pyinstaller.org/)
     - [PyQt5-tools](https://pypi.org/project/PyQt5-tools/)
+
